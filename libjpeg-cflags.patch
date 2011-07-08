@@ -1,0 +1,20 @@
+--- jpeg-6b/makefile.cfg.useCFLAGS	1998-03-21 14:08:57.000000000 -0500
++++ jpeg-6b/makefile.cfg	2006-07-10 17:21:14.000000000 -0400
+@@ -54,7 +54,7 @@
+ # miscellaneous OS-dependent stuff
+ SHELL= /bin/sh
+ # linker
+-LN= @LN@
++LN= @LN@ $(CFLAGS) 
+ # file deletion command
+ RM= rm -f
+ # directory creation command
+@@ -168,7 +168,7 @@
+ 
+ # with libtool:
+ libjpeg.la: @A2K_DEPS@ $(LIBOBJECTS)
+-	$(LIBTOOL) --mode=link $(CC) -o libjpeg.la $(LIBOBJECTS) \
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o libjpeg.la $(LIBOBJECTS) \
+ 		-rpath $(libdir) -version-info $(JPEG_LIB_VERSION)
+ 
+ # sample programs:

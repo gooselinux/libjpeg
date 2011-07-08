@@ -1,0 +1,30 @@
+Work around bogosity in autoconf-2.62: it breaks #undef's that have a
+comment after them, a construct that has worked fine in every previous
+autoconf release.  See bz #449471 and bz #449245.
+
+
+diff -Naur jpeg-6b.orig/jconfig.cfg jpeg-6b/jconfig.cfg
+--- jpeg-6b.orig/jconfig.cfg	1994-12-06 11:43:15.000000000 -0500
++++ jpeg-6b/jconfig.cfg	2008-05-31 16:59:32.000000000 -0400
+@@ -28,11 +28,16 @@
+ 
+ #ifdef JPEG_CJPEG_DJPEG
+ 
+-#define BMP_SUPPORTED		/* BMP image file format */
+-#define GIF_SUPPORTED		/* GIF image file format */
+-#define PPM_SUPPORTED		/* PBMPLUS PPM/PGM image file format */
+-#undef RLE_SUPPORTED		/* Utah RLE image file format */
+-#define TARGA_SUPPORTED		/* Targa image file format */
++/* BMP image file format */
++#define BMP_SUPPORTED
++/* GIF image file format */
++#define GIF_SUPPORTED
++/* PBMPLUS PPM/PGM image file format */
++#define PPM_SUPPORTED
++/* Utah RLE image file format */
++#undef RLE_SUPPORTED
++/* Targa image file format */
++#define TARGA_SUPPORTED
+ 
+ #undef TWO_FILE_COMMANDLINE
+ #undef NEED_SIGNAL_CATCHER
